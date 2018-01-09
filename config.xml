@@ -7,7 +7,7 @@
 
 <!-- versionCode is optional and Android only -->
 
-  <name>Crcl Calculator</name>
+  <name>Renal Calculator</name>
 
   <description>
       Calculates the creatinine clearance using the Cockroft-Gault formula
