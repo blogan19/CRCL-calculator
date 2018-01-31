@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<script src="Jquery.js"></script>
+	<script src="bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body class="grad1">
+
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header grad3">
+	      	<div id="title">Renal Impairment Dosing</div>
+	      	<button id="infoBtn" type="button" class="btn" data-toggle="modal" data-target="#infoModal" ><i class="glyphicon glyphicon-info-sign"></i></button>
+	    </div>
+	  </div>
+	</nav>
+		<div class="container" id="inputForm">
+			<div class="dropContainer">
+				<select class="drop" id="wtDrop" onchange="calculate();">
+					<option>Weight</option>
+				</select>
+				<select class="drop Invis" id="wtDropLbs" onchange="calculate();">
+					<option>Weight</option>
+				</select>
+				<label for="wtChk" id="wtLbl" class="unitLbl">Kg <i class="glyphicon glyphicon-sort"></i></label>
+					<input type="checkbox" id="wtChk" class="unitChange" onclick="wtUnit(); resetWt()" checked>
+			</div>
+			<hr>
+			<div class="dropContainer">
+					<select class="drophalf" id="htDropF" onchange="calculate();">
+						<option>Feet</option>
+					</select>
+					<select class="drophalf ml" id="htDropF2" onchange="calculate();">
+						<option>Inches</option>
+					</select>
+					
+					<select class="drop Invis" id="htDropM" onchange="calculate();">
+						<option>Height</option>
+					</select>
+				
+					<label for="htChk" id="htLbl" class="unitLbl">Feet</label>
+					<input type="checkbox" id="htChk" class="unitChange" onclick="htUnit();resetHt()" checked>
+			</div>
+			<hr>
+
+			<div class="dropContainer">
+				<select class="drop" id="ageDrop" onchange="calculate()">
+					<option>Age</option>
+				</select>
+				<label class="unitLbl">Years</label>
+			</div>
+			<hr>
+			<div class="dropContainer">
+				<select class="drop" id="creatDrop" onchange="calculate()">
+					<option>Serum Creatinine</option>
+				</select>
+				<label class="unitLbl">&mu;mol/L</label>
+			</div>
+			<hr>
+			<div class="dropContainer">
+					<input type="radio"  id="mRad" name="gender" class="Invis gRadio" onclick="calculate()">
+					<label for="mRad" >Male</label>
+					<input type="radio"  id="fRad" name="gender" class="Invis gRadio" onclick="calculate()">
+					<label for="fRad" >Female</label>
+			</div>
+			<hr>
+		</div>
+
+		<div class="container dropContainer Invis" id="ansJumbo">
+				<div class="jumbotron bxShad" id="ansDisplay"></div>
+				<button type="button" class="btn btn-block sqrBtn grad3" onclick="recalculate()"> Recalculate</button>
+				<br>
+				<hr>
+				<select class="drop abxDrop" id="abxSelect" onchange="doseCalculate();AntibioticInstructions()">
+					<option value="1">Select Antibiotic </option>
+					<option value="Amoxicillin">Amoxicillin </option>
+					<option value="Benzylpenicillin">Benzylpenicillin </option>
+					<option value="Cefaclor">Cefaclor</option>
+					<option value="Cefalexin">Cefalexin</option>
+					<option value="Cefotaxime">Cefotaxime</option>
+					<option value="Ceftazidime">Ceftazidime</option>
+					<option value="CefTRIAXone">ceftriaxone</option>
+					<option value="Cefuroxime">Cefuroxime IV/IM</option>
+					<option value="Ciprofloxacin">Ciprofloxacin</option>
+					<option value="ClarithromycinIV">Clarithromycin IV</option>
+					<option value="ClarithromycinPO">Clarithromycin PO</option>
+					<option value="Clindamycin">Clindamycin</option>
+					<option value="Co-amoxiclavIV">Co-amoxiclav IV</option>
+					<option value="Co-amoxiclavPO">Co-amoxiclav PO</option>
+					<option value="Doxycycline">Doxycycline</option>
+					<option value="Ertapenem">Ertapenem</option>
+					<option value="Flucloxacillin">Flucloxacillin</option>
+					<option value="Fosfomycin">Fosfomycin</option>
+					<option value="Fusidic">Fusidic acid/ Sodium fusidate</option>
+					<option value="Gentamicin">Gentamicin</option>
+					<option value="Levofloxacin">Levofloxacin</option>
+					<option value="Linezolid">Linezolid</option>
+					<option value="Meropenem">Meropenem</option>
+					<option value="Metronidazole">Metronidazole</option>
+					<option value="Nitrofurantoin">Nitrofurantoin</option>
+					<option value="Phenoxymethylpenicillin">Phenoxymethylpenicillin(Pen V)</option>
+					<option value="Pivmecillinam">Pivmecillinam </option>
+					<option value="Rifampicin">Rifampicin</option>
+					<option value="Tazocin">Tazocin (Piperacillin/tazobactam)</option>
+					<option value="Teicoplanin"> Teicoplanin </option>
+					<option value="Tigecycline"> Tigecycline </option>
+					<option value="Trimethoprim"> Trimethoprim </option>
+					<option value="Vancomycin"> Vancomycin </option>
+				</select>	
+				<br>
+				<hr>
+		</div>
+		
+
+		<div class="container Invis" id="doseDisplay">
+				<div class="jumbotron abxJumbo bxShad" id="dose"></div>
+		</div>
+
+
+		
+<div id="infoModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+		
+
+<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="abx.js"></script>
+</body>
+</html>
