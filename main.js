@@ -50,10 +50,10 @@ function selectData(min, max, name, unit){
 	}
 }
 selectData(30, 200, 'wtDrop', ' kg');
-selectData(50, 500, 'wtDropLbs', ' lbs');
+selectData(67, 500, 'wtDropLbs', ' lbs');
 selectData(5, 8, 'htDropF', ' feet');
 selectData(0, 12,'htDropF2',' inches');
-selectData(152, 300, 'htDropM', 'cm');
+selectData(153, 300, 'htDropM', 'cm');
 selectData(18, 120, 'ageDrop', '');
 selectData(0, 1000, 'creatDrop', '');
 
@@ -62,8 +62,8 @@ selectData(0, 1000, 'creatDrop', '');
 //function to calculate the creatinine clearance
 function calculate(){
 
- 	var	wtkg = document.getElementById('wtDrop').selectedIndex +29;
- 	var wtlb = document.getElementById('wtDropLbs').selectedIndex +49;
+ 	var	wtkg = document.getElementById('wtDrop').selectedIndex +28;
+ 	var wtlb = document.getElementById('wtDropLbs').selectedIndex +65;
  	var chk =  document.getElementById('wtChk');
  	var weight;
 
@@ -77,12 +77,12 @@ function calculate(){
 
  	//height function to check which height is used
 
- 	var htf = document.getElementById('htDropF').selectedIndex + 4;
+ 	var htf = document.getElementById('htDropF').selectedIndex + 3;
  	var hti = document.getElementById('htDropF2').selectedIndex-1;
  	var htC = (htf * 30.48) + (hti *2.54);
  	
 
- 	var htm = document.getElementById('htDropM').selectedIndex +151;
+ 	var htm = document.getElementById('htDropM').selectedIndex +152;
  	var htChk = document.getElementById('htChk');
  	
 
@@ -111,37 +111,62 @@ function calculate(){
 	var mABW = mIBW + 0.4 * (weight - mIBW);
 	var fABW = fIBW + 0.4 * (weight - fIBW);
 
+	var modalWt = document.getElementById('modalWt');
+	var modalIBW = document.getElementById('modalIBW'); 
+	var modalABW = document.getElementById('modalABW');
+
+
+	if(gender == 1.23){
+		modalWt.innerHTML = weight + "kg";
+		modalIBW.innerHTML = mIBW.toFixed(1) + "kg";
+		modalABW.innerHTML = mABW.toFixed(1) + "kg";
+	}else if(gender == 1.04){
+		modalWt.innerHTML = weight + "kg";
+		modalIBW.innerHTML = fIBW.toFixed(1) + "kg";
+		modalABW.innerHTML = fABW.toFixed(1) + "kg";
+
+	}
+
+
 
 	//age and creatinine
  	var age = document.getElementById('ageDrop').selectedIndex + 17;
  	var srcr = document.getElementById('creatDrop').selectedIndex -1;
+ 	var wtType = document.getElementById('wtType');
 
  	var CRCLAnswer = document.getElementById('ansDisplay');
  	var crcl = 0;
  	if(gender == 1.23 && (weight > (1.2 * mIBW))){
 		crcl = (((140 - age) * mABW * gender) /srcr).toFixed(2);
 		CRCLAnswer.innerHTML = crcl + " ml/min";
+		wtType.innerHTML = " Adjusted body weight";
 
 	} else if(gender == 1.23 && (weight < (1.2 * mIBW))){
 		crcl = (((140 - age) * weight * gender)/srcr).toFixed(2);
 		CRCLAnswer.innerHTML = crcl + " ml/min";
+		wtType.innerHTML = " Actual patient weight";
 		
 	} else if(gender == 1.04 && (weight > (1.2 * mIBW))){
 		crcl = (((140 - age) * fABW * gender) /srcr).toFixed(2);
 		CRCLAnswer.innerHTML = crcl + " ml/min";
+		wtType.innerHTML = " Adjusted body weight";
 			
 	} else if(gender == 1.04 && (weight < (1.2 * mIBW))){
 		crcl = (((140 - age) * weight * gender) /srcr).toFixed(2);
 		CRCLAnswer.innerHTML = crcl + " ml/min";
+		wtType.innerHTML = " Actual patient weight";
 	}
 
 
 	//displays answer jumbo if criteria matches
-	if(weight >= 30 && inchover5 >= 0 && age > 18 && srcr > 1 && gender > 1){
+	if(weight >= 30 && inchover5 >= 0 && age >= 18 && srcr > 1 && gender > 1){
 		console.log("criteria matches");
 		document.getElementById('ansJumbo').style.display = "block";
 		document.getElementById('inputForm').style.display = "none";
-		document.getElementById('title').innerHTML = "Creatinine Clearance"
+		var title = document.getElementById('title');
+		title.innerHTML = "Creatinine Clearance"
+		title.style.marginLeft = "50px";
+		document.getElementById('backBtn').style.display = "block";
 
 	}
  	console.log("\nweight: " + weight + "\nHeight: " + height +"\ninches over 5 foot: " + inchover5 +  " \nage: " + age + "\nsrcr: " + srcr + " \ngender: " + gender);
@@ -163,12 +188,19 @@ function recalculate(){
 	document.getElementById('inputForm').style.display = "block";
 	document.getElementById('ansJumbo').style.display = "none";
 	document.getElementById('doseDisplay').style.display = "none";
-	document.getElementById('title').innerHTML = "Renal Impairement Dosing"
+	var title = document.getElementById('title')
+	title.innerHTML = "Renal Impairement Dosing";
+	title.style.marginLeft = "0px";
+	document.getElementById('backBtn').style.display = "none";
+
 }
+
 function doseCalculate(){
 	var crcl = calculate();
 	document.getElementById('doseDisplay').style.display = "block";
 	console.log("crcl: " + crcl);
 }
+function radioOpacity(){
 
+}
 

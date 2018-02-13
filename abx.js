@@ -5,6 +5,11 @@ function AntibioticInstructions(){
 
     var ABX_dose = 0;
 
+    if(ABX == "1"){
+      document.getElementById('doseDisplay').style.display = "none";
+    }
+
+
   //Amoxicillin
     if(ABX == "Amoxicillin" && renalFunction >= 10){
       ABX_dose = "\nDose as in normal renal function";
@@ -253,6 +258,8 @@ function AntibioticInstructions(){
     }
 
     document.getElementById('dose').innerHTML =  ABX_dose;
+
+    
 
 
   }

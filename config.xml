@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<widget id="io.cordova.hellocordova" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-   <!-- versionCode is optional and Android only -->
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+    xmlns:gap   = "http://phonegap.com/ns/1.0"
+    id          = "com.phonegap.example"
+    versionCode = "10"
+    version     = "1.0.0" >
 
-  <name>Renal Function Antibiotic Calculator</name>
+<!-- versionCode is optional and Android only -->
+
+  <name>Crcl Calculator</name>
 
   <description>
-      Calculates the creatinine clearance using the Cockroft-Gault formula and provides advice on dosing antibiotics.
+      Calculates the creatinine clearance using the Cockroft-Gault formula
   </description>
 
   <author href="" email="benlogan19@gmail.com">
       b Logan
   </author>
-    <content src="index.html" />
-    <platform name="android">
-      <allow-intent href="market:*" />
-  </platform>
 
    <icon src="icon.png" />
 
