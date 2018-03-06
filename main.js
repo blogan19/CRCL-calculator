@@ -49,12 +49,12 @@ function selectData(min, max, name, unit){
 		document.getElementById(name).appendChild(opt);
 	}
 }
-selectData(30, 200, 'wtDrop', ' kg');
-selectData(67, 500, 'wtDropLbs', ' lbs');
-selectData(5, 8, 'htDropF', ' feet');
+selectData(0, 200, 'wtDrop', ' kg');
+selectData(0, 500, 'wtDropLbs', ' lbs');
+selectData(0, 8, 'htDropF', ' feet');
 selectData(0, 12,'htDropF2',' inches');
-selectData(153, 300, 'htDropM', 'cm');
-selectData(18, 120, 'ageDrop', '');
+selectData(0, 300, 'htDropM', 'cm');
+selectData(0, 120, 'ageDrop', '');
 selectData(0, 1000, 'creatDrop', '');
 
 
@@ -62,8 +62,8 @@ selectData(0, 1000, 'creatDrop', '');
 //function to calculate the creatinine clearance
 function calculate(){
 
- 	var	wtkg = document.getElementById('wtDrop').selectedIndex +28;
- 	var wtlb = document.getElementById('wtDropLbs').selectedIndex +65;
+ 	var	wtkg = document.getElementById('wtDrop').selectedIndex +1;
+ 	var wtlb = document.getElementById('wtDropLbs').selectedIndex;
  	var chk =  document.getElementById('wtChk');
  	var weight;
 
@@ -77,12 +77,13 @@ function calculate(){
 
  	//height function to check which height is used
 
- 	var htf = document.getElementById('htDropF').selectedIndex + 3;
+ 	var htf = document.getElementById('htDropF').selectedIndex -1;
+ 	console.log(htf);
  	var hti = document.getElementById('htDropF2').selectedIndex-1;
  	var htC = (htf * 30.48) + (hti *2.54);
  	
 
- 	var htm = document.getElementById('htDropM').selectedIndex +152;
+ 	var htm = document.getElementById('htDropM').selectedIndex -1;
  	var htChk = document.getElementById('htChk');
  	
 
@@ -130,7 +131,7 @@ function calculate(){
 
 
 	//age and creatinine
- 	var age = document.getElementById('ageDrop').selectedIndex + 17;
+ 	var age = document.getElementById('ageDrop').selectedIndex -1;
  	var srcr = document.getElementById('creatDrop').selectedIndex -1;
  	var wtType = document.getElementById('wtType');
 
@@ -167,6 +168,7 @@ function calculate(){
 		title.innerHTML = "Creatinine Clearance"
 		title.style.marginLeft = "50px";
 		document.getElementById('backBtn').style.display = "block";
+		
 
 	}
  	console.log("\nweight: " + weight + "\nHeight: " + height +"\ninches over 5 foot: " + inchover5 +  " \nage: " + age + "\nsrcr: " + srcr + " \ngender: " + gender);
@@ -200,7 +202,75 @@ function doseCalculate(){
 	document.getElementById('doseDisplay').style.display = "block";
 	console.log("crcl: " + crcl);
 }
-function radioOpacity(){
 
+function wtAlert(){
+
+	var	wtkg = document.getElementById('wtDrop').selectedIndex +1;
+ 	var wtlb = document.getElementById('wtDropLbs').selectedIndex;
+ 	var chk =  document.getElementById('wtChk');
+ 	var weight;
+
+ 	//checks which unit has been inputed by user then converts lbs to kg
+ 	if(chk.checked == true){
+ 		weight = wtkg.toFixed();
+ 	}else if(chk.checked == false){
+ 		weight = (wtlb*0.453592).toFixed();
+ 	}
+
+	if(weight <= 30){
+		document.getElementById("warningWt").style.display = "block";
+	}else if(weight > 30){
+		document.getElementById("warningWt").style.display = "none";
+	}
 }
+
+function htAlert(){
+	
+ 	var htf = document.getElementById('htDropF').selectedIndex -1;
+ 	console.log(htf);
+ 	var hti = document.getElementById('htDropF2').selectedIndex-1;
+ 	var htC = (htf * 30.48) + (hti *2.54);
+ 	
+
+ 	var htm = document.getElementById('htDropM').selectedIndex -1;
+ 	var htChk = document.getElementById('htChk');
+ 	
+
+ 	var height;
+
+ 	if(htChk.checked == true && hti >= 0){
+ 		height = htC;
+ 	}else if(htChk.checked == false){
+ 		height = htm;
+ 	}
+
+ 	//gender
+ 	var r1 = document.getElementById('mRad');
+ 	var r2 = document.getElementById('fRad');
+ 	var gender;
+ 	if(r1.checked == true){
+ 		gender = 1.23;
+ 	}else if(r2.checked == true){
+ 		gender = 1.04;
+ 	}
+ 	
+ 	//calculate height over 5 foot, IBW and ABW
+ 	var inchover5 = (height - 152.4)/2.54;
+
+ 	if(inchover5 < 0){
+ 		document.getElementById('warningHt').style.display = "block";
+ 	}else if(inchover5 > 0){
+ 		document.getElementById('warningHt').style.display = "none";
+ 	}
+}
+
+function ageAlert(){
+		var age = document.getElementById('ageDrop').selectedIndex -1;
+		if(age < 18){
+			document.getElementById('warningAge').style.display = "block";
+		}else if (age > 18){
+			document.getElementById('warningAge').style.display = "none";
+		}
+}
+
 

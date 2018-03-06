@@ -38,41 +38,42 @@
 
 		<div class="container" id="inputForm">
 			<div class="dropContainer">
-				<select class="drop" id="wtDrop" onchange="calculate();">
+				<select class="drop" id="wtDrop" onchange="calculate();wtAlert()">
 					<option>Weight</option>
-					<option> < 30kg </option>
 				</select>
-				<select class="drop Invis" id="wtDropLbs" onchange="calculate();">
+				<select class="drop Invis" id="wtDropLbs" onchange="calculate();wtAlert()">
 					<option>Weight</option>
 				</select>
 				<label for="wtChk" id="wtLbl" class="unitLbl">Kg <i class="glyphicon glyphicon-sort"></i></label>
 					<input type="checkbox" id="wtChk" class="unitChange" onclick="wtUnit(); resetWt()" checked>
 			</div>
+			<div class="alert alert-danger margin10 Invis" id="warningWt"> For Patients weighing less than 30kg/67lbs contact pharmacy for specialist advice</div>
 			<hr>
 			<div class="dropContainer">
-					<select class="drophalf" id="htDropF" onchange="calculate();">
+					<select class="drophalf" id="htDropF" onchange="calculate();htAlert()">
 						<option>Feet</option>
-						<option> 5 foot 0</option>
 					</select>
-					<select class="drophalf ml" id="htDropF2" onchange="calculate();">
+					<select class="drophalf ml" id="htDropF2" onchange="calculate();htAlert()">
 						<option>Inches</option>
 					</select>
 					
-					<select class="drop Invis" id="htDropM" onchange="calculate();">
+					<select class="drop Invis" id="htDropM" onchange="calculate();htAlert()">
 						<option>Height</option>
 					</select>
 				
 					<label for="htChk" id="htLbl" class="unitLbl">Feet</label>
 					<input type="checkbox" id="htChk" class="unitChange" onclick="htUnit();resetHt()" checked>
 			</div>
+			<div class="alert alert-danger margin10 Invis" id="warningHt"> For patients under 5 foot / 152cm contact pharmacy for specialist advice</div>
 			<hr>
 
 			<div class="dropContainer">
-				<select class="drop" id="ageDrop" onchange="calculate()">
+				<select class="drop" id="ageDrop" onchange="calculate();ageAlert()">
 					<option>Age</option>
 				</select>
 				<label class="unitLbl">Years</label>
 			</div>
+			<div class="alert alert-danger margin10 Invis" id="warningAge"> For patients under the age of 18 contact pharmacy for specialist advice</div>
 			<hr>
 			<div class="dropContainer">
 				<select class="drop" id="creatDrop" onchange="calculate()">
@@ -88,7 +89,9 @@
 					<label for="fRad" >Female</label>
 			</div>
 			<hr>
+			<button  id="btnPolicy" type="button" class="btn btn-block">See Policy</button>
 		</div>
+
 
 		<div class="container dropContainer Invis" id="ansJumbo">
 				<div class="jumbotron bxShad" id="ansDisplay"></div>
@@ -96,10 +99,8 @@
 				<div class="alert alert-info alert80">
 						Calculated using:<span id="wtType"></span> 	
 				</div>
-				<button  type="button" class="btn" id="btnWt" data-toggle="modal" data-target="#wtModal">More Info <i class="glyphicon glyphicon-info-sign"></i></button>		
-			
+				<button  type="button" class="btn" id="btnWt" data-toggle="modal" data-target="#wtModal">More Info <i class="glyphicon glyphicon-info-sign"></i></button>
 				<hr>
-
 				<select class="drop abxDrop pulse" id="abxSelect" onchange="doseCalculate();AntibioticInstructions()">
 					<option value="1">Select Antibiotic </option>
 					<option value="Amoxicillin">Amoxicillin </option>
@@ -186,12 +187,7 @@
         <p>Patients Adjusted bodyweight:</p>
         <p class="wtDisplay" id="modalABW"></p>
 
-
-
       </div>
-
-      
- 
 
   </div>
 </div>
