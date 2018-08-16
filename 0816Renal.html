@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+	<style type="text/css">
+	body{
+		background: #f1f1f1;
+	}
+	.navbar{
+		background: #457fca;
+		color: white;
+		text-align: center;
+		height: 60px;
+	}
+	.footer {
+	  position: absolute;
+	  bottom: 0;
+	  width: 100%;
+	  height: 50px;
+	  background: linear-gradient(to right, #457fca, #5691c8);
+	}
+	#navContents{
+		font-size: 18px;
+	}
+	.btnInfo{
+		background-color: #ffffff;
+		width: 20%;
+		border: solid #ffffff 0.5px;
+		color: #457fca;
+		float: right;
+		margin-top: 5px;
+	}
+	#resetBtn{
+		margin-right: 10px;
+		width: 30%;
+	}
+	#btnUnits{
+		margin-right: 10px;
+	}
+	.alert-info{
+		background: none;
+		border: 0.5px solid #457fca;
+		color: #457fca;
+	}
+	.togLbl{
+		margin-left: 30px;
+		margin-top: 20px;
+		margin-left: 100px;
+	}
+	.dropContainer{
+	  margin-top: 20px;
+	  width: 100%;
+	  height: 70px;
+	  font-size: 14px;
+	}
+	select {
+	  text-align-last: center;
+	  padding-right: 1em;
+	}
+	.drop{
+	  width: 100%;
+	  height: 100%;
+	  margin-top: 10px;
+	  border-radius: 3px;
+	  border: none;
+	  box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.01), 0px 0px 8px rgba(0, 0, 0, 0.2);
+	  color: #457fca;
+	  background-color: white;
+	  font-size: 14px;
+	  font-weight: bold;
+	  float: left;
+	}
+	.drophalf{
+	  width: 48%;
+	  height: 100%;
+	  margin-top: 10px;
+	  border-radius: 3px;
+	  border: none;
+	  box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.01), 0px 0px 8px rgba(0, 0, 0, 0.2);
+	  color: #457fca;
+	  background-color: white;
+	  font-size: 14px;
+	  font-weight: bold;
+	  float: left;
+	}
+	#htDropI{
+		float: right;
+	}
+	
+	.gRadio + label{
+	  min-height: 30px;
+	  text-align: center;
+	  width: 45%;
+	  vertical-align: middle;
+	  line-height: 20px;
+	  cursor: pointer;
+	  border-radius: 5px;
+	  font-size: 14px;
+	  color: #457fca;
+	  background-color: white;
+	  padding: 10px 10px 10px 10px;
+	  box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.01), 0px 0px 8px rgba(0, 0, 0, 0.2);
+	  margin-left: 2.5%;
+	  margin-top: 15px;
+  
+	}	
+	.gRadio:checked + label{
+	  color: white;
+	  background: linear-gradient(to right, #457fca, #5691c8);
+	}
+	.ansDisplay{
+		text-align: center;
+		font-size: 28px;
+		color: #457fca;
+		background-color: #E9E4F0;
+	   	
+	}
+	.ansDisplay2{
+		font-size: 20px;
+		color: #457fca;
+		border: solid #457fca 1px;
+		background-color: #FFFFFF;
+	}
+	.doseDisplay{
+		color: #457fca;
+		font-size: 18px;
+		background-color: #E9E4F0;
+		
+
+	}
+	#abxTitle{
+		font-size: 1.5em;
+		background: none;
+		border: solid #457fca 1px;
+	}
+	.Invis{
+ 	 display: none;
+	}
+	#answerContainer{
+		margin-top: 10px;
+	}
+	.centre{
+		text-align: center;
+	}
+	.marTop{
+		margin-top: 30px;
+	}
+	.btn-custom{
+		background-color: #457fca;
+		color: #ffffff;
+		border: solid 2px #457fca;
+	}
+	.btn-custom2{
+		background-color: #FFFFFF;
+		color: #457fca;
+		border: solid 2px #457fca;
+		width: 60%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	#abxSelect{
+		font-size: 20px;
+	}
+	#comment{
+		font-size: 12px;
+	}
+	.pulse {
+	  cursor: pointer;
+	  width: 100%;
+	  margin-top: 10px;
+	  border-radius: 1px;
+	  box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.01), 0px 0px 8px rgba(0, 0, 0, 0.2);
+	  animation: pulse 2s infinite;
+	}
+
+	@keyframes pulse {
+	  0% {
+	    -moz-box-shadow: 0 0 0 1px rgba(81, 203, 238, 0.3);
+	    box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.01), 0px 0px 8px rgba(69, 127, 202, 0.2);;
+	  }
+	  50% {
+	      -moz-box-shadow: 0 0 0 3px rgba(81, 203, 238, 0.3);
+	      box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.01), 0px 0px 12px rgba(69, 127, 202, 0.7);;
+	  }
+	  100% {
+	      -moz-box-shadow: 0 0 0 1px rgba(81, 203, 238, 0.3);
+	      box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.01), 0px 0px 8px rgba(69, 127, 202, 0.2);
+	  }
+	}
+	
+	</style>
+</head>
+<body>
+
+
+
+<nav class="navbar navbar-default customAlert">
+        <div class="container-fluid">
+          <div class="navbar-header" style="width: 100%; height: 100%;">
+            <h2 id="navContents">&nbsp;Antibiotic Dosing in Renal Impairment</h2>
+          </div>
+        </div>
+</nav>
+
+
+<div id="info" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">How are Doses Calculated?</h4>
+      </div>
+      <div class="modal-body">
+        <ol>
+		<li><p>Obtain the relevant patient details i.e. weight, height, age, serum creatinine. If the patient is more than 20% above their Ideal Body Weight (IBW), the Adjusted Body Weight (ABW) should be used to calculate the initial dose. The following equation should be used initially to calculate IBW:</p>
+		<p>IBW (kg) in males = 50.0 + (2.3 x every inch over 5ft)<br></br>IBW (kg) in females = 45.5 + (2.3 x every inch over 5ft)</p></li>
+		<li><p>Then calculate Adjusted Body Weight (ABW). The following equation should be used:</p>
+		<p>ABW (kg) = IBW + 0.4(Total body weight – IBW)</p></li>
+		<li><p>Calculate creatinine clearance (CrCl) using equation below:</p>
+		<p>CrCl (ml/min) in males = ((140 – age in years) x 1.23 x ABW in kg) ÷ Serum creatinine (micromoles/l)<br></br>CrCl (ml/min) in females = ((140 – age in years) x 1.04 x ABW in kg ÷ Serum creatinine (micromoles/l)</p></li>
+		<li><p>Calculate dose according to ABW and CrCl</p></li>
+		</ol>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="disclaimer-modal" class="modal" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Mersey Micro Disclaimer Agreement</h1>
+      </div>
+      <div class="modal-body">
+        <p>This is the disclaimer agreement for Mersey Micro.</p>
+
+        <h2>Compliance with the Medical Devices Directive (93/42/EEC)</h2>
+
+        <p>St Helens and Knowsley Teaching Hospitals NHS Trust confirms that the App is designed and manufactured to comply with the relevant Essential Requirements set out in the Medical Devices Directive (93/42/EEC). When used under the conditions and for the purposes intended, the App will not compromise the clinical condition or the safety of patients, or the safety and health of users or, where applicable, other persons.</p>
+
+        <h2>No warranties</h2>
+
+        <p>Subject to the paragraph above, the information within, and the operation of, the App is provided on an "as is" basis without any representations or warranties, express or implied, and St Helens and Knowsley Teaching Hospitals NHS Trust makes no representations or warranties in relation to it.</p>
+
+        <p>You acknowledge, agree, and understand that the App is for use by medical professionals only and that it is intended to be used as a tool and a guide to the prescribing of antibiotics to patients only. The App is designed with safety functions in order to eliminate or reduce risks as far as possible. However, nothing in the App should be considered to be a substitution for medical expertise, experience and judgement.</p>
+
+        <p>We will endeavour to keep the information on the App complete, accurate and/or up to date. However, due to the nature of the information being provided information contained in the App may quickly become out-of-date. Without prejudice to the generality of the above paragraph, St Helens and Knowsley Teaching Hospitals NHS Trust does NOT warrant that:</p>
+
+        <ul>
+          <li>the App, or the information on the App, will be available all of the time; or</li>
+          <li>the operation of the App will be error-free; or</li>
+          <li>the information on the App is complete, true, accurate and/or up-to-date.</li>
+        </ul>
+
+        <h2>Liability</h2>
+
+        <p>Under no circumstances will St Helens and Knowsley Teaching Hospitals NHS Trust be liable to you or to any other person for any indirect, special, incidental, exemplary, consequential or other damages arising out of any use or misuse of the App, even if St Helens and Knowsley Teaching Hospitals NHS Trust is advised of the possibility of such damages being awarded.</p>
+
+        <p>Without prejudice to the generality of the above paragraph, St Helens and Knowsley Teaching Hospitals NHS Trust shall have no liability arising out of any use of the App which is not in accordance with the instructions for use and/or under the conditions and/or for the purposes intended, for:</p>
+
+        <ul>
+          <li>Any loss or injury caused, in whole or in part, by the procuring, compiling, or delivering of the App or the information in it;</li>
+          <li>Any errors, omissions, or inaccuracies in the App or the information in it; or</li>
+          <li>Any decision made or action taken or not taken in reliance on the App or the information in it.</li>
+        </ul>
+
+        <h2>Intellectual Property Rights</h2>
+
+        <p>The App and the information within it are protected by copyright and other intellectual property laws in numerous countries around the world and St Helens and Knowsley Teaching Hospitals NHS Trust expressly asserts its ownership of and reserves all of its rights around the world in such intellectual property rights.</p>
+
+        <h2>Usage and age restriction</h2>
+
+        <p>The App is intended for use by persons aged eighteen years or older who are qualified medical professionals. Persons under the age of eighteen years must not access or use the App.</p>
+
+        <h2>Indemnification</h2>
+
+        <p>You agree to indemnify and hold St Helens and Knowsley Teaching Hospitals NHS Trust harmless from any claim or demand, including costs and expenses, made by any third party as a result of your use or misuse of the App which is not in accordance with the instructions for use and/or under the conditions and/or for the purposes intended and any action you take which is or may be based on the information contained within the App.</p>
+
+        <h2>Governing law</h2>
+
+        <p>This disclaimer and your use of the App and the information in it shall be governed by and construed in accordance with the laws of England and Wales and any dispute will be submitted to the English courts.</p>
+
+        <h2>Modification</h2>
+
+        <p>St Helens and Knowsley Teaching Hospitals NHS Trust may, at its sole discretion, modify this disclaimer and the App and the information within it in whole or in part at any time for any reason without giving notice to you.</p>
+
+        <p>You must check the disclaimer page of the App prior to each use of the App, whether prior or otherwise. Such modified terms and conditions shall supersede these terms and conditions and shall become binding when published online on the Site.</p>
+
+        <p>The app can be updated to all users over a short time period assuming network coverage for the users portable device, so any problems can be quickly corrected.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" onclick="$('#disclaimer-modal').modal('hide'); window.scrollTo(0, 0);">Accept</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" id="inputForm">
+
+
+	<div class="alert alert-info">Enter patient details below to calculate renal function</div>
+	<div id="switchCollapse" class="collapse">
+		<label class="togLbl">Height:
+		<input type="checkbox"  id="wtCheck" class="togs"  data-toggle="toggle" data-on="Centimetres" data-off="Feet & inches" data-onstyle="info" data-offstyle="info" data-width="120" onchange="weightType()">
+		</label>
+	</div>
+	<!-- CDN: www.bootstraptoggle.com -->
+	<div class="dropContainer">
+		<select class="drop" id="wtDrop" onchange="getVal();">
+			<option>Weight</option>
+		</select>
+
+		<select class="drophalf" id="htDropF" onchange="getVal();">
+			<option>Feet</option>
+		</select>
+		<select class="drophalf" id="htDropI" onchange="getVal();">
+			<option>Inches</option>
+		</select>
+		<select class="drop Invis" id="htDropCm" onchange="getVal()">
+			<option>Centimetres</option>
+		</select>
+		<select class="drop" id="ageDrop" onchange="getVal();">
+			<option>Age</option>
+		</select>
+		<select class="drop" id="creatDrop" onchange="getVal();">
+			<option>Serum creatinine</option>
+		</select>
+		
+		<input type="radio"  id="mRad" name="gender" class="Invis gRadio" onclick="getVal();" value="1.23">
+		<label for="mRad">Male </span></label>
+		<input type="radio"  id="fRad" name="gender" class="Invis gRadio" onclick="getVal();" value="1.04">
+		<label for="fRad" >Female </span></label>
+	</div>
+</div>
+
+<div class="container Invis" id="answerContainer">
+	<div class="dropContainer" id="rfAns">
+		<div class="jumbotron ansDisplay" id="ansDisplay"></div>
+		<div class="alert alert-info centre weightypeDisplay2" id="weightUsedDisp"></div>
+		<button type="button" class="btn btn-custom btn-block" onclick="resetCalc()"><i class="glyphicon glyphicon-repeat"></i> Re-calculate</button>
+		<hr>
+		<select class="drop pulse" id="abxSelect" onchange="doseCalculate()"></select>
+	</div>		
+</div>
+
+<div class="container Invis marTop" id="abxContainer">
+	<div class="alert alert-info centre" id="abxTitle"></div>
+	<div class="jumbotron centre doseDisplay" id="doseDisplay"></div>
+	<hr>
+	<div class="alert alert-info centre ansDisplay2" id="ansDisplay2"></div>
+	<div class="alert alert-info centre weightypeDisplay2" id="weightUsedDisp2"></div>
+	<button type="button" class="btn btn-custom btn-block" onclick="resetAbxSelect()"><i class="glyphicon glyphicon-repeat"></i> Select Another Antibiotic</button>
+</div>
+			
+<footer class="footer">
+  <div class="container">
+
+    <button data-toggle="modal" class="btn btn-block btnInfo" data-target="#info">Info <span class="glyphicon glyphicon-info-sign"></span></button>
+    <button type="button" id="resetBtn" class="btn btn-block btnInfo" onclick="resetInput()">Reset <span class="glyphicon glyphicon-refresh"></span></button>
+    <button type="button" id="btnUnits" class="btn btn-block btnInfo" data-toggle="collapse" data-target="#switchCollapse">Units</button>
+  </div>
+</footer>			
+
+<script type="text/javascript">
+
+	window.onload = function () {
+    if (localStorage.getItem("hasCodeRunBefore") === null) {
+        $("#disclaimer-modal").modal()
+        localStorage.setItem("hasCodeRunBefore", true);
+    }
+}
+
+
+
+//test patients [weight,height inches over 5ft,age,creat,gen,ans];
+var antibiotics = ["Select Antibiotic","Amoxicillin","Azithromycin","Aztreonam","Benzylpenicillin","Cefaclor","Cefalexin","Cefotaxime","Ceftazidime","CefTRIAXone","Cefuroxime","Chloramphenicol","Ciprofloxacin","Clarithromycin IV","Clarithromycin Oral","Clindamycin","Co-amoxiclav IV","Co-amoxiclav Oral","Co-trimoxazole","Doxycycline","Ertapenem","Erythromycin","Fidaxomicin", "Flucloxacillin","Fosfomycin Oral","Fusidic acid/Sodium fusidate","Gentamicin","Levofloxacin","Linezolid","Meropenem","Metronidazole","Nitrofurantoin","Phenoxymethylpenicillin(Pen V)","Pivmecillinam","Rifampicin","Tazocin(Piperacillin/tazobactam)","Teicoplanin","Tigecycline","Trimethoprim","Vancomycin"];
+
+
+function abxSelect(){
+	for(var i = 0; i<antibiotics.length; i++){
+		var opt = document.createElement('option');
+		opt.value = antibiotics[i];
+		opt.innerHTML = antibiotics[i];
+		document.getElementById('abxSelect').appendChild(opt);
+	}
+}	
+abxSelect();
+
+function selectData(min, max, name, unit){
+	for(var i =min; i < max; i++){
+		var opt = document.createElement('option');
+		opt.value = i;
+		opt.innerHTML = i + unit;
+		document.getElementById(name).appendChild(opt);
+	}
+}
+selectData(30, 200, 'wtDrop', ' kg');
+selectData(5, 8, 'htDropF', ' feet');
+selectData(0, 12,'htDropI',' inches');
+selectData(153,300, 'htDropCm','cm');
+selectData(18, 120, 'ageDrop', ' years');
+selectData(0, 1000, 'creatDrop', ' micromoles/L');
+
+function weightType(){
+	var chk = document.getElementById('wtCheck');
+
+	if(chk.checked === true){
+		$("#htDropCm").show();
+		$("#htDropF").hide();	
+		$("#htDropI").hide();
+	}else if(chk.checked === false){
+		$("#htDropCm").hide();
+		$("#htDropF").show();	
+		$("#htDropI").show();
+	}
+}
+weightType();
+
+function getVal(){
+		w = $('#wtDrop :selected').val(); //weight
+		f = $('#htDropF :selected').val(); //heigh feet
+		i = $('#htDropI :selected').val(); // height inches
+		cm = $('#htDropCm :selected').val();// height cm
+		a = $('#ageDrop :selected').val(); //age years
+		cr = $('#creatDrop :selected').val(); // creatinine
+		g = $("input[name='gender']:checked").val(); //gender
+		var inches = parseInt(i);
+		var feet = (parseInt(f)*12);
+		h = feet + inches;
+		rf = 0;
+		var HO5;
+		if(document.getElementById('wtCheck').checked === true){
+			HO5 =((cm/2.54)-60).toFixed();
+			console.log(cm + " " + HO5);
+		}else if(document.getElementById('wtCheck').checked === false){
+		    HO5 = h - 60; //height over 5 foot in inches
+		}
+		
+
+		if(w>30 && a >= 18 && cr > 0 && g > 0 && HO5 >=0){
+			//calculate(w, HO5, a, c, g, 0);
+			var array = [w, HO5, a, cr, g, 0, 0];
+			tp.push(array)
+			test();
+		}
+}
+//test patients [weight,height inches over 5ft,age,creat,gen,ans, weight used];
+var tp = [[47,6,90,80,1.04,30.6,47],[47,12,90,80,1.04,30.6,47],[150,0,85,100,1.04,49.9,87.3],[60,18,85,100,1.04,34.3,60],[45,3,73,400,1.04,7.8,45],[120,5,73,400,1.04,14.3,82.2],[140,6,68,70,1.04,98,91.58],[85,8,68,100,1.04,54.2,72.34],[65,12,57,350,1.04,16,65],[70,20,57,140,1.04,43.2,70],[145,3,53,200,1.04,40.5,89.44],[155,7,53,350,1.04,25.6,98.96],[35,8,47,80,1.04,42.3,35],[75,9,47,90,1.04,80.6,75],[65,5,43,75,1.04,87.4,65],[90,10,43,75,1.04,103.7,77.1],[130,12,37,140,1.04,73.3,95.86],[120,3,37,140,1.04,60.8,79.44],[45,4,33,30,1.04,166.9,45],[70,6,33,400,1.04,19.5,70],[65,9,27,120,1.04,63.7,65],[85,10,27,150,1.04,58.8,75.1],[90,13,23,70,1.04,156.4,90],[100,16,23,65,1.04,167.3,89.38],[150,9,19,140,1.04,89.6,99.72],[81,18,23,325,1.04,30.3,81],[57,16,27,65,1.04,103.1,57],[59,3,90,157,1.04,19.5,59],[137,4,75,233,1.04,25.4,87.62],[94,1,91,261,1.04,12.9,66.28],[84,0,63,259,1.04,18.8,60.9],[127,12,32,99,1.04,107.4,94.66],[107,15,97,161,1.04,25.2,90.8],[82,4,60,71,1.04,76.9,65.62],[114,10,35,201,1.04,47.1,86.7],[41,7,39,189,1.04,22.8,41],[65,2,98,182,1.04,13.5,56.06],[53,9,60,87,1.04,50.7,53],[78,2,61,151,1.04,33.3,61.26],[120,17,51,104,1.04,87.9,98.76],[86,9,44,135,1.04,54.8,74.12],[63,13,87,275,1.04,12.6,63],[125,9,26,96,1.04,110.8,89.72],[70,15,66,161,1.04,33.5,70],[61,4,30,109,1.04,64,61],[91,12,53,289,1.04,25.1,80.26],[78,14,52,121,1.04,59,78],[81,11,54,67,1.04,108.1,81],[111,8,83,95,1.04,51.6,82.74],[90,6,80,120,1.04,37.2,71.58],[75,12,80,120,1.04,39,75],[150,0,75,100,1.04,59,87.3],[60,18,75,100,1.04,40.6,60],[45,3,70,400,1.04,8.2,45],[120,5,70,400,1.04,15,82.2],[140,6,60,70,1.04,108.8,91.58],[85,8,60,100,1.04,60.2,72.34],[65,12,55,350,1.04,16.4,65],[70,20,55,140,1.04,44.2,70],[145,3,50,200,1.04,41.9,89.44],[155,7,50,350,1.04,26.5,98.96],[35,8,45,80,1.04,43.2,35],[75,9,45,90,1.04,82.3,75],[65,5,40,75,1.04,90.1,65],[90,10,40,75,1.04,106.9,77.1],[130,12,35,140,1.04,74.8,95.86],[120,3,35,140,1.04,62,79.44],[45,4,30,30,1.04,171.6,45],[70,6,30,400,1.04,20,70],[65,9,25,120,1.04,64.8,65],[85,10,25,150,1.04,59.9,75.1],[90,13,20,70,1.04,160.5,90],[100,16,20,65,1.04,171.6,89.38],[150,9,18,140,1.04,90.4,99.72],[105,3,18,120,1.04,77.7,73.44],[47,6,90,80,1.23,36.1,47],[47,12,90,80,1.23,36.1,47],[150,0,85,100,1.23,60.9,90],[60,18,85,100,1.23,40.6,60],[45,3,73,400,1.23,9.3,45],[120,5,73,400,1.23,17.5,84.9],[140,6,68,70,1.23,119.3,94.28],[85,8,68,100,1.23,66.5,75.04],[65,12,57,350,1.23,19,65],[70,20,57,140,1.23,51,70],[145,3,53,200,1.23,49.3,92.14],[155,7,53,350,1.23,31.1,101.66],[35,8,47,80,1.23,50,35],[75,9,47,90,1.23,95.3,75],[65,5,43,75,1.23,103.4,65],[90,10,43,75,1.23,126.9,79.8],[130,12,37,140,1.23,89.2,98.56],[120,3,37,140,1.23,74.3,82.14],[45,4,33,30,1.23,197.4,45],[70,6,33,400,1.23,23,70],[65,9,27,120,1.23,75.3,65],[85,10,27,150,1.23,78.8,85],[90,13,23,70,1.23,185,90],[100,16,23,65,1.23,221.4,100],[150,9,19,140,1.23,108.9,102.42],[81,18,23,325,1.23,35.9,81],[57,16,27,65,1.23,121.9,57],[59,3,90,157,1.23,23.1,59],[137,4,75,233,1.23,31,90.32],[94,1,91,261,1.23,15.9,68.98],[84,0,63,259,1.23,23.3,63.6],[127,12,32,99,1.23,130.6,97.36],[107,15,97,161,1.23,30.7,93.5],[82,4,60,71,1.23,94.7,68.32],[114,10,35,201,1.23,57.4,89.4],[41,7,39,189,1.23,26.9,41],[65,2,98,182,1.23,18.45,65],[53,9,60,87,1.23,59.9,53],[78,2,61,151,1.23,41.2,63.96],[120,17,51,104,1.23,106.8,101.46],[86,9,44,135,1.23,67.2,76.82],[63,13,87,275,1.23,14.9,63],[125,9,26,96,1.23,135,92.42],[70,15,66,161,1.23,39.6,70],[61,4,30,109,1.23,75.7,61],[91,12,53,289,1.23,33.7,91],[78,14,52,121,1.23,69.8,78],[81,11,54,67,1.23,127.9,81],[111,8,83,95,1.23,63.1,85.44],[90,6,80,120,1.23,45.7,74.28],[75,12,80,120,1.23,46.1,75],[150,0,75,100,1.23,72,90],[60,18,75,100,1.23,48,60],[45,3,70,400,1.23,9.7,45],[120,5,70,400,1.23,18.3,84.9],[140,6,60,70,1.23,132.5,94.28],[85,8,60,100,1.23,73.8,75.04],[65,12,55,350,1.23,19.4,65],[70,20,55,140,1.23,52.3,70],[145,3,50,200,1.23,51,92.14],[155,7,50,350,1.23,32.2,101.66],[35,8,45,80,1.23,51.1,35],[75,9,45,90,1.23,97.4,75],[65,5,40,75,1.23,106.6,65],[90,10,40,75,1.23,130.9,79.8],[130,12,35,140,1.23,90.9,98.56],[120,3,35,140,1.23,75.8,82.14],[45,4,30,30,1.23,203,45],[70,6,30,400,1.23,23.7,70],[65,9,25,120,1.23,76.6,65],[85,10,25,150,1.23,80.2,85],[90,13,20,70,1.23,189.8,90],[100,16,20,65,1.23,227.1,100],[150,9,18,140,1.23,109.8,102.42],[105,3,18,120,1.23,95.2,76.14]];
+var tpLength = tp.length;
+var weightUsed = "";
+function test(){
+	var count = 0;
+		for(i=0; i<tp.length; i++){
+			calculate(tp[i][0],tp[i][1],tp[i][2],tp[i][3],tp[i][4],tp[i][5],tp[i][6]);
+		}
+
+		function calculate(wt, ht, age, creat, gen, ans, wtUsed){
+
+		//wtUsed = wtUsed.toFixed(0)
+		var mIBW = (ht *2.3)+50;
+		var mABW =  mIBW + 0.4*(wt - mIBW);
+
+		var fIBW = (ht *2.3) + 45.5;
+
+		var fABW = fIBW + 0.4*(wt - fIBW);
+		var IBW;
+		var ABW;
+
+		if(gen == 1.23){
+			IBW = mIBW;
+			ABW = mABW;
+		}else if(gen == 1.04){
+			IBW = fIBW;
+			ABW = fABW;
+		}
+		if(wt > IBW*1.2){
+			wt = ABW;
+			weightUsed = "Calculated using adjusted body weight";
+		}else if(wt < IBW *1.2){
+			weightUsed = "Calculated using actual body weight";
+		}
+
+		if(wtUsed == 0){
+			wtUsed = wt;
+		}
+	
+		rf = ((140-age)*gen*wt)/creat;
+		console.log("rf:" + rf + " ans " + ans + "\n wt: " + wt + " wtUsed: " +wtUsed)
+		if(rf.toFixed(1) == ans.toFixed(1)  && wt.toFixed(2) == wtUsed){
+			// if calculated answer = actual answer and the correct weight is used then count increases by 1
+			count++;
+		}
+	};
+	if(count == tpLength){
+		console.log('test passed');
+		var d = document.getElementById('ansDisplay');
+		var d2 = document.getElementById('ansDisplay2');
+		document.getElementById('weightUsedDisp').innerHTML = weightUsed; 
+		document.getElementById('weightUsedDisp2').innerHTML = weightUsed; 
+
+		d.innerHTML= rf.toFixed(2) + " ml/min";
+		d2.innerHTML= rf.toFixed(2) + " ml/min";
+		d.style.display = "block";
+		$("#inputForm").slideUp("slow");
+		document.getElementById('answerContainer').style.display = "block";
+		document.getElementById('btnUnits').style.display = "none";
+	}else if(count != 2){
+		console.log("failed");
+	}
+}
+
+function resetInput(){
+	location.reload();
+}
+
+function resetCalc(){
+	$("#inputForm").slideDown("slow");
+	$("#answerContainer").slideUp("slow");
+	document.getElementById('btnUnits').style.display = "block";
+}
+
+function resetAbxSelect(){
+	$("#answerContainer").slideDown("slow");
+	$("#abxContainer").slideUp("slow"); 
+	$("#abxSelect").val("Select Antibiotic");
+	test();
+}
+
+function doseCalculate(){
+	$("#answerContainer").slideUp("slow");
+	$("#abxContainer").slideDown("slow");
+	var ab = $("#abxSelect").val();
+	console.log(rf + " " + ab);
+	document.getElementById('abxTitle').innerHTML = ab;
+	rf = rf.toFixed()
+	
+	var d; //dose
+	var dn = "Dose as in normal renal function"
+	var c; //comments
+	
+
+	if(ab == "Amoxicillin" && rf > 10){
+		d = dn;
+		c = "Up to 6g/day can be used in the treatment of endocarditis";
+	}else if( ab == "Amoxicillin" && rf <= 10){
+		d = "250mg to 1g every 8 hours";
+		c = "Up to 6g/day can be used in the treatment of endocarditis";
+	}
+
+	if(ab =="Azithromycin"){
+		d = dn;
+		c = "In patients with a GFR<10 mL/min a 33% increase in systemic exposure to azithromycin was seen therefore the manufacturer advises to use with caution."
+	}
+
+	if(ab == "Aztreonam" && rf > 20){
+		d = dn;
+		c = "";
+	}else if(ab == "Aztreonam" && rf > 10 && rf <=20){
+		d = "1-2g loading dose then maintenance dose of 50% of the appropriate normal dose";
+		c = "";
+	}else if(ab == "Aztreonam" && rf <= 10){
+		d = "1-2g loading dose then maintenance of 25% of appropriate normal dose";
+		c = "";
+	}
+
+	if(ab == "Benzylpenicillin" && rf >20){
+		d = dn;
+		c = "Increased incidence of seizures in renal impairment. Can cause hypokalaemia at high doses";
+	}else if(ab == "Benzylpenicillin" && rf <= 20 && rf > 10){
+		d = "600mg to 2.4g every 6 hours (depending on severity of infection)";
+		c = "Increased incidence of seizures in renal impairment. Can cause hypokalaemia at high doses";
+	}else if(ab == "Benzylpenicillin" && rf <= 10){
+		d = "600mg t0 1.2g every 6 hours (depending on severity of infection";
+		c = "Increased incidence of seizures in renal impairment. Can cause hypokalaemia at high doses";
+	}
+
+	if(ab == "Cefaclor"){
+		d = dn;
+		c = "";
+	}
+
+	if(ab == "Cefalexin" && rf > 40){
+		d = dn;
+		c = "";
+	}else if(ab == "Cefalexin" && rf > 20 && rf <= 40){
+		d = "250mg to 500mg every 8 - 12 hours"
+		c = "";
+	}else if(ab == "Cefalexin" && rf <= 10){
+		d  = "500mg every 12 to 24 hours"
+		c = "";
+	}
+
+	if(ab == "Cefotaxime" && rf > 5){
+		d = dn;
+		c = "Do not alter frequency Reduce dose further if there is concurrent hepatic failure";
+	}else if(ab == "Cefotaxime" && rf <= 5){
+		d = "50% of normal dose at same frequency"
+		c = "Do not alter frequency Reduce dose further if there is concurrent hepatic failure";
+	}
+
+	if(ab == "Ceftazidime" && rf>50){
+		d = dn;
+		c = "";
+	}else if(ab == "Ceftazidime" && rf >30 && rf <= 50){
+		d = "1-2g every 24 hours";
+		c = "";
+	}else if(ab == "Ceftazidime" && rf > 15 && rf <= 30){
+		d = "1-2g every 24 hours";
+		c = "";
+	}else if(ab == "Ceftazidime" && rf >6 &&  rf <= 15){
+		d = "500mg-1g every 24 hours";
+		c = "";
+	}else if(ab == "Ceftazidime" && rf <=5){
+		d = "500mg-1g every 48 hours";
+		c = "";
+	}
+
+	if(ab == "CefTRIAXone"){
+		d = dn;
+		c = "Suggest a maximum of 2g in severe renal impairment (<10ml/min)"
+	}
+
+	if(ab == "Cefuroxime" && rf > 50){
+		d = dn;
+		c = "";
+	}else if(ab == "Cefuroxime" && rf >20 && rf <= 50){
+		d = "1.5g every 8 hours";
+		c = "";
+	}else if(ab == "Cefuroxime" && rf > 10 && rf <=20){
+		d = "750mg-1.5g every 12 hours";
+		c = "";
+	}else if(ab == "Cefuroxime" && rf <=10){
+		d = "650mg-1.5g every 24 hours";
+		c = "";
+	}
+
+	if(ab == "Chloramphenicol"){
+		d = dn;
+		c = "manufacturers recommend monitoring patients serum levels in patients with renal impairment"
+	}
+
+	if(ab == "Ciprofloxacin" && rf > 30){
+		d = dn;
+		c = "";
+	}else if(ab == "Ciprofloxacin" && rf >10 &&  rf<=30){
+		d = "50-100% of normal dose";
+		c = "";
+	}else if(ab == "Ciprofloxacin" && rf <10){
+		d = "50% of normal dose";
+		c = "";
+	}
+
+	if((ab == "Clarithromycin IV" || ab == "Clarithromycin Oral") && rf > 30){
+		d = dn;
+		c = "Check for hazardous drug interactions"
+	}else if((ab == "Clarithromycin IV" || ab == " Clarithromycin Oral") && rf >10 && rf <=30){
+		d = "250mg-500mg every 12 hours";
+		c = "Check for hazardous drug interactions"
+	}else if((ab == "Clarithromycin IV" || ab == " Clarithromycin Oral") && rf <10){
+		d = "250mg-500mg every 12 hours"
+		c = "Check for hazardous drug interactions"
+	}
+	
+
+	if(ab == "Clindamycin"){
+		d = dn;
+		c = "Dose may require reduction with severe renal impairment due to prolonged half life Periodic renal & LFT monitoring during prolonged course";
+	}
+
+	if(ab == "Co-amoxiclav Oral"){
+		d = dn;
+		c = "";
+	}
+
+	if(ab == "Co-amoxiclav IV" && rf > 30){
+		d = dn;
+		c = "";
+	}else if(ab == "Co-amoxiclav IV" && rf <= 30){
+		d = "1.2g every 12 hours";
+		c = "";
+	}
+
+	if(ab == "Co-trimoxazole" && rf >30){
+		d = dn;
+		c = "";
+	}else if(ab == 'Co-trimoxazole' && rf <=30 && rf >15){
+		d = "For PCP see product literature. For all other indications use 50% of normal dose"
+		c = "";
+	}else if(ab == "Co-trimoxazole" && rf <= 15){
+		d = "Not recommended when GFR < 15ml/min"
+		c = "";
+	}
+
+	if(ab == "Doxycycline"){
+		d = dn;
+		c = "";
+	}
+
+	if(ab == "Ertapenem" && rf > 30){
+		d = dn;
+		c = "";
+	}else if(ab == "Ertapenem" && rf >10 && rf <=30){
+		d = "No manufacturer information.  50-100% of normal dose recommended in renal drug handbook";
+		c = "";
+	}else if(ab == "Ertapenem" && rf < 10){
+		d = "No manufacturer information. 50% of dose or 1g three times a WEEK is suggested in the renal drug handbook";
+		c = "";
+	}
+
+	if(ab == "Erythromycin"){
+		d = dn;
+		c = "Increased risk of ototoxicity in renal impairment especially at high doses";
+	}
+
+	if(ab == "Fidaxomicin"){
+		d = dn;
+		c = "Cautioned in patients with macrolide sensitivity or with a GFR<30ml/min";
+	}
+
+	if(ab == "Flucloxacillin" && rf >10){
+		d = dn;
+		c = "";
+	}else if(ab == "Flucloxacillin" && rf <=10){
+		d = "Dose as in normal renal function up to a total daily dose of 4g";
+		c = "";
+	}
+
+	if(ab == "Fosfomycin Oral" && rf > 10){
+		d = dn;
+		c = "Prolonged drug half-life in renal impairment monitor patient for side effect"
+	}else if(ab == "Fosfomycin Oral" && rf <= 10){
+		d = "Contraindicated";
+		c = "Prolonged drug half-life in renal impairment monitor patient for side effect"
+	}
+
+	if(ab == "Fusidic acid/Sodium fusidate"){
+		d = dn;
+		c = "Fusidic acid is excreted in the bile and therefore no dose modifications are necessary.";
+	}
+
+	if(ab == "Gentamicin"){
+		d = "Refer to policy on the intranet or Mersey Micro Smart App";
+		c = "";
+	}
+
+	if(ab == "Levofloxacin" && rf >50){
+		d = dn;
+		c = "";
+	}else if(ab == "Levofloxacin" && rf > 30 && rf <= 50){
+		d = "Initial dose of 500mg then 250mg every 12-24 hours";
+		c = "";
+	}else if(ab == "Levofloxacin" && rf > 10 && rf <= 30){
+		d = "Initial dose of 500mg then 125mg 12 hourly";
+		c = "";
+	}else if(ab == "Levofloxacin" && rf <= 10){
+		d = "500mg stat followed by 125mg every 24 hours";
+		c = "";
+	}
+
+	if(ab == "Linezolid" && rf > 10){
+		d = dn;
+		c = "Two metabolites accumulate in renal failure which have MAOI activity but no antibacterial activity. Therefore monitor closely for serotonin syndrome."
+	}else if(ab == "Linezolid" && rf <= 10){
+		d = "Dose as in normal renal function but monitor closely";
+		c = "Two metabolites accumulate in renal failure which have MAOI activity but no antibacterial activity. Therefore monitor closely for serotonin syndrome."
+	}
+
+	if(ab == "Meropenem" && rf > 50){
+		d = dn;
+	}else if(ab == "Meropenem" && rf > 20 && rf <= 50){
+		d = "500mg to 2g every 12 hours";
+		c = "";
+	}else if(ab == "Meropenem" && rf >10 && rf <= 20){
+		d = "500mg to 1g every 12 hours or 500mg every 8 hours";
+		c = "";
+	}else if(ab == "Meropenem" && rf <= 10){
+		d = "500mg to 1g every 24 hours";
+		c = "";
+	}
+
+	if(ab == "Metronidazole"){
+		d = dn;
+		c = "Active metabolites accumulate in renalimpairment. Rare drug induced lupus"
+	}
+
+	if(ab == "Nitrofurantoin" && rf > 45){
+		d = dn;
+		c = "";
+	}else if(ab == "Nitrofurantoin" && rf >30 && rf <=45){
+		d = dn;
+		c = "Nitrofurantoin may be used with caution in individual cases as short-course therapy only for the treatment of lower UTI with an eGFR between 30–44 mL/min to treat resistant pathogens, when the benefits may outweigh the risks of undesirable effects"
+	}
+
+	if(ab == "Phenoxymethylpenicillin(Pen V)"){
+		d = dn;
+		c = "";
+	}
+
+	if(ab == "Pivmecillinam"){
+		d = dn;
+		c = "Accumulation may occur in patients with severe renal impairment (<10mL/min), so use the lower dose if using for extended periods of time.";
+	}
+
+	if(ab == "Rifampicin" && rf > 10){
+		d = dn;
+		c = "Potential  for hazardous drug interactions";
+	}else if(ab == "Rifampicin" && rf <= 10){
+		d = "50-100% of normal dose";
+		c = "Potential  for hazardous drug interactions";
+	}
+
+	if(ab =="Tazocin(Piperacillin/tazobactam)" && rf > 40){
+		d = dn;
+		c = "";
+	}else if(ab == "Tazocin(Piperacillin/tazobactam)" && rf >20 && rf <= 40){
+		d = "4.5g every 8 hours";
+		c = "";
+	}else if(ab == "Tazocin(Piperacillin/tazobactam)" && rf < 20){
+		d = "4.5g every 12 hours";
+		c = "";
+	}
+
+	if(ab == "Teicoplanin"){
+	  d = "Refer to antibiotics policy on the intranet or Mersey micro smart app";
+	  c = "";
+	}
+
+	if(ab == "Tigecycline"){
+		d = dn;
+		c = "";
+	}
+
+	if(ab == "Trimethoprim" && rf > 25){
+		d = dn;
+		c = "Can cause hyperkalaemia. Consider alternative antibiotic for UTI if GFR<15mL/min as unlikely to be effective."
+	}else if(ab == "Trimethoprim" && rf <15 && rf <= 25){
+		d = "Normal dose for 3 days then 50% of dose";
+		c = "Can cause hyperkalaemia. Consider alternative antibiotic for UTI if GFR<15mL/min as unlikely to be effective."
+	}else if(ab == "Trimethoprim" && rf <= 15){
+		d = "50% of normal dose";
+		c = "Can cause hyperkalaemia. Consider alternative antibiotic for UTI if GFR<15mL/min as unlikely to be effective."
+	}
+
+	if(ab == "Vancomycin"){
+		d = "Refer to antibiotics policy on the intranet or Mersey micro smart app";
+		c = "";
+	}
+
+	document.getElementById('doseDisplay').innerHTML = d + "<br><br><span id='comment'>" + c + "</span>";
+
+	document.getElementById('navContents').innerHTML = "<h4>Recommended Dosage</h4>";
+	
+}
+
+
+
+
+
+
+</script>		
+
+
+
+
+    
+
+
+		
+
+
+</body>
+</html>
